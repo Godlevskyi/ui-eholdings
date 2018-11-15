@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Icon } from '@folio/stripes/components';
+import {
+  Icon,
+  Paneset,
+} from '@folio/stripes/components';
 
 import { createResolver } from '../../redux';
 import { Status } from '../../redux/application';
 import NoBackendErrorScreen from '../../components/error-screen/no-backend-error-screen';
 import FailedBackendErrorScreen from '../../components/error-screen/failed-backend-error-screen';
 import InvalidBackendErrorScreen from '../../components/error-screen/invalid-backend-error-screen';
-import styles from './application.css';
 
 class ApplicationRoute extends Component {
   static propTypes = {
@@ -33,7 +35,7 @@ class ApplicationRoute extends Component {
     } = this.props;
 
     return (
-      <div className={styles['eholdings-application']} data-test-eholdings-application>
+      <Paneset data-test-eholdings-application>
         {version ? (status.isLoading ? (
           <Icon icon="spinner-ellipsis" />
         ) : status.request.isRejected ? (
@@ -43,7 +45,7 @@ class ApplicationRoute extends Component {
             ? <InvalidBackendErrorScreen />
             : children
         )) : <NoBackendErrorScreen />}
-      </div>
+      </Paneset>
     );
   }
 }
